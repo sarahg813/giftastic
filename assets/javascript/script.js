@@ -1,3 +1,4 @@
+//array list of bands
 var bands = [
     "Beyonce", 
     "JAYZ",
@@ -13,15 +14,18 @@ var bands = [
     "Drake"
 ];
 
+//function to make buttons for the bands
 function makeBandButton(band) {
     var button = $('<button>').text(band).addClass("bandButton");
     $('#bandButtonsDiv').append(button);
 }
 
+//loop over the bands array and call the makeBandButton to make the buttons
 for (var index in bands) {
     makeBandButton(bands[index]);  
 }
 
+//when you click the add button, it takes the input and creates a button with the makeBandButton function
 $('#addNew').on('click', function() {
     event.preventDefault();
     var newBand = $('input').val().trim(); 
@@ -29,6 +33,7 @@ $('#addNew').on('click', function() {
     $('input').val('');
 });
 
+//function to get the data from the Giphy API
 function getGiphy(band) {
     var giphyQueryURL = "https://api.giphy.com/v1/gifs/search?q=" + band + "&api_key=GI4ebNfFXrRWvnyKNFJEMy4koZFJZDZ9&limit=10";
 
@@ -41,7 +46,8 @@ function getGiphy(band) {
             var animatedLink = giphyResponse["data"][i]["images"]["fixed_width"]["url"];
             var rating = $('<p>').text("rating: " + giphyResponse["data"][i]["rating"]);
             var img = $("<img>");
-
+            
+            //adding the attributes to the img to be able to use them for the still and animate urls
             img.attr({
                 src: stillLink,
                 class: "giphy",
@@ -57,6 +63,7 @@ function getGiphy(band) {
     });
 }
 
+//function to get data from the Bands In Town API
 function getBandsInTown(band) {
     var bitQueryUrl = "https://rest.bandsintown.com/artists/" + band + "?app_id=codingbootcamp";
 
@@ -76,7 +83,7 @@ function getBandsInTown(band) {
     });
 }
 
-
+//when you click on the band button, you execute the getGiphy and getBandsInTown functions by using the button's text as the band name for the argument
 $(document).on('click', '.bandButton', function() {
     var bandName = $(this).text();
     
@@ -85,6 +92,7 @@ $(document).on('click', '.bandButton', function() {
 
 });
 
+//when you click on a gif, it will animate when it is still and vice versa
 $(document).on("click", ".giphy", function() {
     var gif = $(this);
     var state = gif.attr('data-state');
@@ -100,6 +108,7 @@ $(document).on("click", ".giphy", function() {
     }
 });
 
+//function for the "See Tour Dates" button to open the link to the artists info in bandsintown.com
 $(document).on("click", ".goToArtist", function() {
     window.open($(this).attr("data-url"));
 });
