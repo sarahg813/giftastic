@@ -75,3 +75,15 @@ p {
     font-family: 'Raleway', sans-serif;
     font-size: .9em;
 }
+
+@media (max-width: 768px) {
+    #bandInfo {
+        width: 85%;
+    }
+    #container {
+        flex-direction: column;
+    }
+    #displayGifs {
+        flex-direction: column;
+    }
+}
