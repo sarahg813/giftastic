@@ -3,9 +3,9 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Bandtastic</title>
+    <title>Bandtastic App</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Jolly+Lodger|Quintessential|Tangerine" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Comfortaa|Raleway|Ubuntu" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -15,20 +15,25 @@
 
 <body>
     <div class="header">
-        <h1>Bandtastic Giphy App</h1>
+        <h1>Bandtastic App</h1>
+        <p>Gifs from giphy.com</p>
+        <p>Band Info from bandsintown.com</p>
     </div>
    
     <div class="main">
-        <form>
-            <input type="text">
-            <button id="addNew">add a new band</button>	
-        </form>
+        <div id="formDiv">
+            <form>
+                <input type="text">
+                <button id="addNew">add a new band</button>	
+            </form>
+         </div>  
 
-        <div id="bandButtons"></div>
+        <div id="bandButtonsDiv"></div>
+        <div id="container">
+            <div id="bandInfo"></div>
 
-        <div id="bandInfo"></div>
-
-        <div id="displayGifs"></div>  
+            <div id="displayGifs"></div>  
+        </div>
 
 
     </div>

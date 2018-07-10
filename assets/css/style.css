@@ -1,0 +1,77 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0 15px 0;
+}
+
+h1 {
+    font-family: 'Comfortaa', cursive;
+    font-size: 3em;
+}
+
+#formDiv {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+#addNew {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: .9em;
+}
+
+#bandButtonsDiv {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.bandButton {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: .85em;
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    
+}
+
+#bandInfo {
+    width: 25%;
+    padding: 0 0 0 13px;
+    background-color: #909497;
+    color: white;
+}
+
+#displayGifs {
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+
+}
+
+.imgDiv {
+    margin: 5px;
+}
+
+h2 {
+    font-family: 'Abril Fatface', cursive;
+    font-size: 2em;
+    margin-bottom: 5px;
+    color: white;
+}
+
+p {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1em;
+    line-height: 1.35em;
+}
+
+.goToArtist {
+    font-family: 'Raleway', sans-serif;
+    font-size: .9em;
+}

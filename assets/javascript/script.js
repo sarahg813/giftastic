@@ -14,8 +14,8 @@ var bands = [
 ];
 
 function makeBandButton(band) {
-    var button = $('<button>').text(band);
-    $('#bandButtons').append(button);
+    var button = $('<button>').text(band).addClass("bandButton");
+    $('#bandButtonsDiv').append(button);
 }
 
 for (var index in bands) {
@@ -29,11 +29,8 @@ $('#addNew').on('click', function() {
     $('input').val('');
 });
 
-
-$(document).on('click', '#bandButtons button', function() {
-    var bandName = $(this).text();
-    var giphyQueryURL = "https://api.giphy.com/v1/gifs/search?q=" + bandName + "&api_key=GI4ebNfFXrRWvnyKNFJEMy4koZFJZDZ9&limit=10";
-    var bitQueryUrl = "https://rest.bandsintown.com/artists/" + bandName + "?app_id=codingbootcamp";
+function getGiphy(band) {
+    var giphyQueryURL = "https://api.giphy.com/v1/gifs/search?q=" + band + "&api_key=GI4ebNfFXrRWvnyKNFJEMy4koZFJZDZ9&limit=10";
 
     $.ajax({url: giphyQueryURL})
     .then(function(giphyResponse) { 
@@ -54,22 +51,38 @@ $(document).on('click', '#bandButtons button', function() {
                 "data-rating": giphyResponse["data"][i]["rating"]
             });
 
-            $('#displayGifs').prepend(img, rating);
+            var imgDiv = $('<div>').append(img, rating).addClass("imgDiv"); 
+            $('#displayGifs').prepend(imgDiv);
         }
     });
-    
+}
+
+function getBandsInTown(band) {
+    var bitQueryUrl = "https://rest.bandsintown.com/artists/" + band + "?app_id=codingbootcamp";
+
     $.ajax({url: bitQueryUrl})
     .then(function(bitResponse) { 
-        var artistName = $("<h1>").text(bitResponse.name);
+        var artistName = $("<h2>").text(bitResponse.name);
         var artistImage = $("<img>").attr("src", bitResponse.thumb_url);
-        var trackerCount = $("<h2>").text(bitResponse.tracker_count + " fans tracking this artist");
-        var upcomingEvents = $("<h2>").text(bitResponse.upcoming_event_count + " upcoming events");
-        var goToArtist = $("<a>").attr("href", bitResponse.url).text("See Tour Dates");
+        var trackerCount = $("<p>").text(bitResponse.tracker_count + " fans tracking this artist");
+        var upcomingEvents = $("<p>").text(bitResponse.upcoming_event_count + " upcoming events");
+
+        var goToArtist = $("<button>").attr("data-url", bitResponse.url);
+        goToArtist.text("See Tour Dates").addClass("goToArtist");
 
         $('#bandInfo').empty();
         $('#bandInfo').append(artistName, artistImage, trackerCount, upcomingEvents, goToArtist);
 
     });
+}
+
+
+$(document).on('click', '.bandButton', function() {
+    var bandName = $(this).text();
+    
+    getGiphy(bandName);
+    getBandsInTown(bandName);
+
 });
 
 $(document).on("click", ".giphy", function() {
@@ -85,4 +98,8 @@ $(document).on("click", ".giphy", function() {
         gif.attr('src', still);
         gif.attr('data-state', "still");
     }
+});
+
+$(document).on("click", ".goToArtist", function() {
+    window.open($(this).attr("data-url"));
 });
